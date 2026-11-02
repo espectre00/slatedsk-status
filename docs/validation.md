@@ -25,4 +25,12 @@ Primera ejecución real [41463514189](https://github.com/espectre00/slatedsk-sta
 
 Dominio definitivo verificado: `status.slatedsk.com` tiene CNAME a `espectre00.github.io`; la comprobación DNS de GitHub indica dominio válido y sin proxy. Certificado aprobado para ese nombre y HTTPS obligatorio activado. Lecturas HTTPS normales, sin omitir validación de certificado: página HTTP 200 con título esperado y JSON schemaVersion 1 con cuatro componentes.
 
-Pendientes externos: configurar token gratuito de Globalping y comprobar su contrato real desde ambas regiones, desplegar no-store en API, verificar cron y ensayo completo de apertura/cierre en repositorio de prueba. No se afirma haber validado estas condiciones de lanzamiento.
+## Contraste y ensayo reales
+
+Token dedicado configurado únicamente como secreto de Actions, sin Origins. La ejecución manual [41464887518](https://github.com/espectre00/slatedsk-status/actions/runs/41464887518) completó el contraste real desde Europa (Alemania) y Norteamérica (Estados Unidos). Las respuestas HTTP 200 de salud sin no-store permanecen como verificación incompleta.
+
+El [ensayo seguro 41465586968](https://github.com/espectre00/slatedsk-status/actions/runs/41465586968), en su intento final, confirmó HTTP 404 desde GitHub y ambas regiones sobre un destino estático de prueba. Abrió [el aviso de prueba #1](https://github.com/espectre00/slatedsk-status/issues/1), repitió sin duplicarlo, mantuvo el aviso tras una primera ronda correcta y lo cerró después de la segunda. Confirmó que se conserva en GitHub y queda excluido del historial de incidencias de los servicios. No interrumpió servicios ni modificó datos de clientes.
+
+Los intentos iniciales permitieron corregir dos diferencias reales con las simulaciones: Globalping rechaza un parámetro query vacío; las listas de Issues pueden tardar en reflejar una creación ya aceptada. Se omiten consultas vacías y se conservan las escrituras confirmadas durante cada recorrido para impedir duplicados y retrasos de visibilidad. Once pruebas locales correctas tras estos cambios; auditoría pública sin hallazgos.
+
+Pendientes externos: desplegar no-store en API y verificar la primera ejecución por cron. No se afirma haber validado estas condiciones de lanzamiento.
