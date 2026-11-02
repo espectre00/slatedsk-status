@@ -4,6 +4,8 @@ Repositorio independiente basado en la plantilla pública [Upptime](https://gith
 
 Es un fork deliberado: el monitor y la página originales de Upptime se sustituyen para controlar confirmación, recuperación, frescura y publicación. No se ejecuta `upptime/uptime-monitor update`: abriría incidencias desde una comprobación individual. No se activan actualizaciones automáticas de plantilla que puedan sobrescribir esta política. La configuración ejecutable de los contratos está en `src/config.mjs`; mantener alineada `.upptimerc.yml` al cambiar componentes.
 
+Los snapshots YAML conservan la estructura de Upptime, con una extensión propia: `status` admite `unknown` y `slatedskStatus` conserva el estado detallado. Solo una interrupción confirmada genera `down`; una verificación incompleta no se convierte en caída. El contrato canónico completo es el JSON público, no un indicador binario de Upptime.
+
 El repositorio se publica con historial nuevo, sin commits heredados ni archivos del repositorio privado. `npm run audit:public` controla rutas permitidas, archivos sensibles y patrones de credenciales antes de publicar. Solo informa ruta, línea y regla; nunca imprime el valor detectado. No sustituye la revisión del contenido manual que el equipo decide hacer público en Issues.
 
 ## Flujo

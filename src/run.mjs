@@ -31,7 +31,8 @@ await writeFile('site/data/status.json', JSON.stringify(data, null, 2) + '\n');
 // Registro append-only de rondas: conserva también incidencias entre publicaciones.
 await mkdir('history', { recursive: true });
 for (const c of result) {
-  await writeFile(`history/${c.id}.yml`, `url: ${c.url}\nstatus: ${c.status === 'operational' ? 'up' : 'down'}\ncode: ${c.primary.code || 0}\nresponseTime: ${c.primary.ms || 0}\nlastUpdated: ${at}\nstartTime: ${c.firstCheckedAt || at}\ngenerator: SlateDsk (Upptime fork)\n`);
+  const binaryStatus = c.status === 'operational' ? 'up' : c.status === 'outage' ? 'down' : 'unknown';
+  await writeFile(`history/${c.id}.yml`, `url: ${c.url}\nstatus: ${binaryStatus}\nslatedskStatus: ${c.status}\ncode: ${c.primary.code || 0}\nresponseTime: ${c.primary.ms || 0}\nlastUpdated: ${at}\nstartTime: ${c.firstCheckedAt || at}\ngenerator: SlateDsk (Upptime fork)\n`);
 }
 await writeFile('history/rounds.ndjson', JSON.stringify({ at, components: result }) + '\n', { flag: 'a' });
 const readme = await readFile('README.md', 'utf8');
