@@ -17,4 +17,10 @@ Lectura pública real a las **14:29 UTC**:
 
 Estas observaciones puntuales no constituyen una serie de disponibilidad ni acreditan operaciones autenticadas. `tests/live-check.mjs` permite repetir solo estas lecturas, sin Issues ni publicación. No se han incorporado resultados simulados a `site/data/status.json`: permanece sin verificar.
 
-Pendientes externos: crear/publicar repositorio, configurar token gratuito de Globalping y comprobar su contrato real desde ambas regiones, desplegar no-store en API, habilitar Pages, DNS sin proxy y HTTPS, verificar cron y ensayo completo de apertura/cierre en repositorio de prueba. No se afirma haberlos validado. La CLI de GitHub no tiene sesión y el conector disponible no ofrece crear repositorios.
+## Primera publicación
+
+Repositorio público creado con historial nuevo y commit inicial `0e84d5230f76ce6489081dd2ed92629fe0cdee67`, sin commits de la plantilla ni archivos privados. Auditoría de 33 archivos sin patrones de credenciales detectados. El workflow ejecuta también la auditoría antes y después de generar datos. No publica mensajes de error de servidores, cuerpos HTTP, IPs ni valores de secretos.
+
+Primera ejecución real [41463514189](https://github.com/espectre00/slatedsk-status/actions/runs/41463514189), completada correctamente: pruebas, auditorías, comprobaciones desde GitHub, commit de resultados y despliegue en Pages. Etiquetas de avisos preparadas. Acceso provisional: https://espectre00.github.io/slatedsk-status/.
+
+Pendientes externos: configurar token gratuito de Globalping y comprobar su contrato real desde ambas regiones, desplegar no-store en API, DNS sin proxy y HTTPS del dominio, verificar cron y ensayo completo de apertura/cierre en repositorio de prueba. El subdominio status todavía no tiene registro DNS. No se afirma haber validado estas condiciones de lanzamiento.
