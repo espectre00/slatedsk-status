@@ -9,7 +9,7 @@ const server=createServer(async(req,res)=>{
   try {
     const path=resolve(root,'.'+decodeURIComponent(new URL(req.url,'http://localhost').pathname==='/'?'/index.html':new URL(req.url,'http://localhost').pathname));
     if(!path.startsWith(root))throw new Error('path');
-    res.setHeader('Content-Type',({'.html':'text/html','.css':'text/css','.mjs':'text/javascript','.json':'application/json','.svg':'image/svg+xml'})[extname(path)]||'text/plain');res.end(await readFile(path));
+    res.setHeader('Content-Type',({'.html':'text/html','.css':'text/css','.mjs':'text/javascript','.json':'application/json','.svg':'image/svg+xml','.png':'image/png','.woff2':'font/woff2'})[extname(path)]||'text/plain');res.end(await readFile(path));
   } catch {res.writeHead(404);res.end();}
 });
 await new Promise(r=>server.listen(0,'127.0.0.1',r));
@@ -19,10 +19,10 @@ const errors=[];
 try {
   const page=await browser.newPage();page.on('pageerror',e=>errors.push(e.message));
   const initial=JSON.parse(await readFile('site/data/status.json','utf8'));
-  let fixture=structuredClone(initial),broken=false;
+  let fixture={...structuredClone(initial),generatedAt:null},broken=false;
   await page.route('**/data/status.json*',async route=>broken?route.abort():route.fulfill({json:fixture}));
   const url=`http://127.0.0.1:${server.address().port}`;
-  const load=async()=>{await page.goto(url);await page.waitForTimeout(100);};
+  const load=async()=>{await page.goto(url);await page.evaluate(()=>document.fonts.ready);await page.waitForTimeout(100);};
   await load();assert.equal(await page.locator('#headline').textContent(),'Estado sin verificar');
   fixture.generatedAt=new Date().toISOString();fixture.components=fixture.components.map(c=>({...c,status:'operational',lastValidAt:fixture.generatedAt,checkedAt:fixture.generatedAt,lastResult:{status:'operational',at:fixture.generatedAt}}));
   await load();assert.equal(await page.locator('#headline').textContent(),'Comprobaciones correctas');
@@ -32,6 +32,7 @@ try {
   assert.equal(await page.locator('#headline').textContent(),'Mantenimiento comunicado');
   await page.locator('summary').click();assert.equal(await page.locator('details img').count(),0);
   assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
+  await page.evaluate(()=>window.scrollTo(0,0));
   await page.screenshot({path:'out/mobile.png',fullPage:true});
   fixture.generatedAt=new Date(Date.now()-16*60_000).toISOString();await load();assert.equal(await page.locator('#headline').textContent(),'Estado sin verificar');
   assert.equal(await page.locator('details').count(),1);
