@@ -23,4 +23,6 @@ Repositorio público creado con historial nuevo y commit inicial `0e84d5230f76ce
 
 Primera ejecución real [41463514189](https://github.com/espectre00/slatedsk-status/actions/runs/41463514189), completada correctamente: pruebas, auditorías, comprobaciones desde GitHub, commit de resultados y despliegue en Pages. Etiquetas de avisos preparadas. Acceso provisional: https://espectre00.github.io/slatedsk-status/.
 
-Pendientes externos: configurar token gratuito de Globalping y comprobar su contrato real desde ambas regiones, desplegar no-store en API, DNS sin proxy y HTTPS del dominio, verificar cron y ensayo completo de apertura/cierre en repositorio de prueba. El subdominio status todavía no tiene registro DNS. No se afirma haber validado estas condiciones de lanzamiento.
+Dominio definitivo verificado: `status.slatedsk.com` tiene CNAME a `espectre00.github.io`; la comprobación DNS de GitHub indica dominio válido y sin proxy. Certificado aprobado para ese nombre y HTTPS obligatorio activado. Lecturas HTTPS normales, sin omitir validación de certificado: página HTTP 200 con título esperado y JSON schemaVersion 1 con cuatro componentes.
+
+Pendientes externos: configurar token gratuito de Globalping y comprobar su contrato real desde ambas regiones, desplegar no-store en API, verificar cron y ensayo completo de apertura/cierre en repositorio de prueba. No se afirma haber validado estas condiciones de lanzamiento.
