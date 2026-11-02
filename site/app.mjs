@@ -9,8 +9,8 @@ function render() {
   const priority = ['outage', 'partial', 'degraded', 'incomplete', 'unverified', 'observation', 'operational'];
   let overall = priority.find(s => states.some(c => c.shown === s)) || 'unverified';
   const manual = data?.incidents?.filter(i => i.manual && i.state === 'open') || [];
-  document.querySelector('#headline').textContent = manual.length ? (manual.some(i => !i.maintenance) ? 'Incidencia comunicada por el equipo' : 'Mantenimiento comunicado') : labels[overall];
-  document.querySelector('#overall').dataset.state = manual.length ? 'partial' : overall;
+  document.querySelector('#headline').textContent = stale ? labels.unverified : manual.length ? (manual.some(i => !i.maintenance) ? 'Incidencia comunicada por el equipo' : 'Mantenimiento comunicado') : labels[overall];
+  document.querySelector('#overall').dataset.state = stale ? 'unverified' : manual.length ? 'partial' : overall;
   document.querySelector('#summary-detail').textContent = stale ? 'No hay información reciente verificable. Conservamos los últimos resultados con sus fechas.' : manual.length ? 'Consulta los avisos del equipo y el alcance de las comprobaciones de cada servicio.' : overall === 'operational' ? 'Las comprobaciones públicas han respondido correctamente.' : 'Consulta los detalles de cada servicio. La causa no se atribuye automáticamente a ningún proveedor.';
   document.querySelector('#updated').textContent = `Última publicación de datos: ${date(data?.generatedAt)} · Actualización automática de esta página cada minuto.`;
   const container = document.querySelector('#components'); container.replaceChildren();

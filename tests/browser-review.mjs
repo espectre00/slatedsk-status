@@ -33,9 +33,10 @@ try {
   await page.locator('summary').click();assert.equal(await page.locator('details img').count(),0);
   assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
   await page.screenshot({path:'out/mobile.png',fullPage:true});
-  fixture.incidents=[];fixture.generatedAt=new Date(Date.now()-16*60_000).toISOString();await load();assert.equal(await page.locator('#headline').textContent(),'Estado sin verificar');
+  fixture.generatedAt=new Date(Date.now()-16*60_000).toISOString();await load();assert.equal(await page.locator('#headline').textContent(),'Estado sin verificar');
+  assert.equal(await page.locator('details').count(),1);
   await page.screenshot({path:'out/stale.png',fullPage:true});
-  fixture.generatedAt=new Date().toISOString();broken=true;await load();assert.equal(await page.locator('#headline').textContent(),'Estado sin verificar');
+  fixture.incidents=[];fixture.generatedAt=new Date().toISOString();broken=true;await load();assert.equal(await page.locator('#headline').textContent(),'Estado sin verificar');
   assert.deepEqual(errors,[]);await writeFile('out/browser-result.json',JSON.stringify({passed:true,width:390,checks:['initial','fresh','maintenance','escaping','mobile-overflow','stale','publication-or-fetch-failure'],errors},null,2));
   console.log('Revisión visual correcta: escritorio, móvil, antigüedad, avisos y fallo de datos.');
 } finally {await browser.close();await new Promise(r=>server.close(r));}
