@@ -4,6 +4,7 @@ import { check } from './check.mjs';
 import { classify, transition } from './engine.mjs';
 import { Globalping } from './globalping.mjs';
 import { GitHub } from './github.mjs';
+import { makeHistory } from './history.mjs';
 if (!process.env.GITHUB_TOKEN) throw new Error('GITHUB_TOKEN requerido; usar npm test para simulaciones sin red.');
 const at = new Date().toISOString();
 let previous;
@@ -25,7 +26,10 @@ for (const component of components) {
 }
 const github = new GitHub(repository, process.env.GITHUB_TOKEN);
 const incidents = await github.sync(result, at);
-const data = { schemaVersion: 1, generatedAt: new Date().toISOString(), repository: `https://github.com/${repository}`, components: result, incidents };
+let historyText = '';
+try { historyText = await readFile('history/rounds.ndjson', 'utf8'); } catch (error) { if (error.code !== 'ENOENT') throw error; }
+const history = makeHistory(historyText, { at, components: result });
+const data = { schemaVersion: 1, generatedAt: new Date().toISOString(), repository: `https://github.com/${repository}`, components: result, incidents, history };
 await mkdir('site/data', { recursive: true });
 await writeFile('site/data/status.json', JSON.stringify(data, null, 2) + '\n');
 // Registro append-only de rondas: conserva también incidencias entre publicaciones.

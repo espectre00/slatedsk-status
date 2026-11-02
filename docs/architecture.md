@@ -18,6 +18,8 @@ Dos rondas correctas contiguas cierran el aviso. Una ronda incompleta corta la r
 
 `site/data/status.json` tiene `schemaVersion`, `generatedAt`, componentes con `checkedAt`, `lastValidAt`, `lastResult`, resultados de GitHub, repetición, regiones, mediciones e incidencias con actualizaciones. `history/rounds.ndjson` conserva rondas en Git; no almacena cuerpos HTTP, IPs, cabeceras sensibles ni datos de clientes. No se calculan porcentajes de disponibilidad sobre periodos sin muestras.
 
+El campo adicional `history` del JSON contiene hasta 60 observaciones por componente, reconstruidas desde el registro real más la ronda actual. Solo publica fecha, estado y tiempo de respuesta. Ordena y deduplica por fecha; rechaza estados/componentes desconocidos y fechas inválidas o futuras. La página muestra esas muestras como barras con leyenda y mantiene gris cualquier ausencia de registros. Este historial no altera la clasificación ni la política de recuperación del monitor.
+
 Primero sincroniza Issues, después versiona datos y README, y solo entonces despliega Pages. Un fallo de Issues impide publicar una ronda incompleta como correcta. Si falla commit o publicación, el sitio conserva sus fechas antiguas y deja de mostrar verde al caducar; el resumen del repositorio exige leer su fecha. El navegador comprueba antigüedad cada 10 s, consulta JSON cada minuto y al recuperar visibilidad. Un error al cargar datos desactiva el verde inmediatamente.
 
 ## Globalping y coste
