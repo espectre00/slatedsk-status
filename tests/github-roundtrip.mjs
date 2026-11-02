@@ -8,7 +8,7 @@ if (repository !== 'espectre00/slatedsk-status' || !process.env.GITHUB_TOKEN || 
 const gp = new Globalping(process.env.GLOBALPING_TOKEN);
 const gh = new GitHub(repository, process.env.GITHUB_TOKEN);
 const marker = '<!-- slatedsk-monitor:validation -->';
-const testIssues = async () => (await gh.all('issues?state=all')).filter(i => i.user.login === 'github-actions[bot]' && i.body?.includes(marker));
+const testIssues = async () => (await gh.listIssues()).filter(i => i.user.login === 'github-actions[bot]' && i.body?.includes(marker));
 async function round(url, previous) {
   const component = {id:'validation',name:'Prueba técnica del monitor (sin impacto en SlateDsk)',kind:'html',url};
   const primary = await check(component), retry = await check(component);

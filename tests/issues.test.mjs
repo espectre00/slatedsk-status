@@ -31,3 +31,11 @@ test('avisos y comentarios ajenos no se publican',async()=>{
   f.comments.set(2,[{user:{login:'stranger'},body:'fake'},{user:{login:'owner'},body:'actualización'}]);
   const out=await f.github.publicIncidents();assert.equal(out.length,1);assert.equal(out[0].maintenance,true);assert.equal(out[0].updates.length,1);
 });
+test('las listas atrasadas de GitHub no duplican ni ocultan una escritura aceptada',async()=>{
+  const f=fixture();f.github.all=async()=>[];
+  const c={id:'api',name:'API',status:'outage',activeIncident:true,goodRounds:0};
+  await f.github.sync([c],'2026-11-02');
+  await f.github.sync([c],'2026-11-02');
+  assert.equal(f.creates(),1);
+  assert.equal((await f.github.publicIncidents()).length,1);
+});
