@@ -19,6 +19,14 @@ await mkdir('out',{recursive:true});
 const errors=[];
 try {
   const page=await browser.newPage();page.on('pageerror',e=>errors.push(e.message));
+  // Simula una copia antigua en la URL sin versión. La versión publicada debe
+  // importar config con hash y no utilizar estas etiquetas españolas.
+  let oldConfigRequests=0;
+  await page.route('**/config.mjs',async route=>{
+    if(new URL(route.request().url()).search) return route.continue();
+    oldConfigRequests++;
+    await route.fulfill({contentType:'text/javascript',body:"export const labels={operational:'Comprobaciones correctas'}; export const components=[];"});
+  });
   const initial=JSON.parse(await readFile('site/data/status.json','utf8'));
   let fixture={...structuredClone(initial),generatedAt:null,history:{}},broken=false;
   await page.route('**/data/status.json*',async route=>broken?route.abort():route.fulfill({json:fixture}));
@@ -30,6 +38,9 @@ try {
   fixture.history=makeHistory(await readFile('history/rounds.ndjson','utf8').catch(()=>''),{at:fixture.generatedAt,components:fixture.components});
   await load();assert.equal(await page.locator('#headline').textContent(),'Operational');
   assert.equal(await page.locator('.history-bar').count(),240);
+  assert.equal(oldConfigRequests,0);
+  assert.equal(await page.getByText('Comprobaciones correctas',{exact:true}).count(),0);
+  assert.equal(await page.getByRole('heading',{name:'Public website',exact:true}).count(),1);
   await page.screenshot({path:'out/desktop-preview.png'});
   await page.screenshot({path:'out/desktop.png',fullPage:true});
   await page.locator('[data-component="web"] > summary').click();
