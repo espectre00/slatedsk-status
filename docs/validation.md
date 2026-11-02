@@ -33,4 +33,6 @@ El [ensayo seguro 41465586968](https://github.com/espectre00/slatedsk-status/act
 
 Los intentos iniciales permitieron corregir dos diferencias reales con las simulaciones: Globalping rechaza un parámetro query vacío; las listas de Issues pueden tardar en reflejar una creación ya aceptada. Se omiten consultas vacías y se conservan las escrituras confirmadas durante cada recorrido para impedir duplicados y retrasos de visibilidad. Once pruebas locales correctas tras estos cambios; auditoría pública sin hallazgos.
 
-Pendientes externos: desplegar no-store en API y verificar la primera ejecución por cron. No se afirma haber validado estas condiciones de lanzamiento.
+La API ya devuelve no-store en producción. Una lectura pública a las 15:05 UTC verificó los cuatro componentes: web y acceso HTML/JS correctos, salud JSON correcta y disponibilidad de datos correcta, todos con HTTP 200. El despliegue del cambio de caché terminó correctamente después de las pruebas del repositorio privado. No se han publicado fuentes ni registros de ese repositorio.
+
+Pendiente externo: observar la primera ejecución por cron. El workflow está activo y las ejecuciones manuales funcionan; no se presenta esto como prueba de que el programador ya haya ejecutado una ronda. GitHub puede retrasar el horario configurado.

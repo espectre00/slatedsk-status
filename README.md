@@ -21,7 +21,7 @@ Una ronda tiene vigencia de 15 minutos. Lee SIEMPRE su fecha: GitHub puede retra
 
 Base: [Upptime](https://github.com/upptime/upptime), con monitor propio para confirmación regional, recuperación y datos antiguos. GitHub Pages, Actions e Issues; Globalping gratuito para contraste ante anomalías. Sin servicios de pago ni recursos del VPS en la página de estado.
 
-Publicado en [status.slatedsk.com](https://status.slatedsk.com/) con DNS directo a GitHub Pages y HTTPS obligatorio verificados. Globalping y el ensayo real de incidencias están comprobados. Pendientes: desplegar no-store en API y verificar la primera ejecución por cron. Véase [la puerta de lanzamiento](docs/runbook.md).
+Publicado en [status.slatedsk.com](https://status.slatedsk.com/) con DNS directo a GitHub Pages y HTTPS obligatorio verificados. Globalping, el ensayo real de incidencias y no-store en la API están comprobados. Pendiente: verificar la primera ejecución por cron. Véase [la puerta de lanzamiento](docs/runbook.md).
 
 - [Arquitectura, contratos y límites](docs/architecture.md)
 - [Publicación, mantenimiento y recuperación](docs/runbook.md)
