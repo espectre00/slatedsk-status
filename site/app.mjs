@@ -24,8 +24,8 @@ function render() {
   const manual = data?.incidents?.filter(i => i.manual && i.state === 'open') || [];
   document.querySelector('#headline').textContent = stale ? labels.unverified : manual.length ? (manual.some(i => !i.maintenance) ? 'Incidencia comunicada por el equipo' : 'Mantenimiento comunicado') : labels[overall];
   document.querySelector('#overall').dataset.state = stale ? 'unverified' : manual.length ? 'partial' : overall;
-  document.querySelector('#summary-detail').textContent = stale ? 'No hay información reciente verificable. Conservamos los últimos resultados con sus fechas.' : manual.length ? 'Consulta los avisos del equipo y el alcance de las comprobaciones de cada servicio.' : overall === 'operational' ? 'Las comprobaciones públicas han respondido correctamente.' : 'Consulta los detalles de cada servicio. La causa no se atribuye automáticamente a ningún proveedor.';
-  document.querySelector('#updated').textContent = `Última comprobación publicada: ${date(data?.generatedAt)} · La página se actualiza cada minuto.`;
+  document.querySelector('#summary-detail').textContent = stale ? 'No hay una comprobación reciente.' : manual.length ? 'Consulta la incidencia publicada.' : overall === 'operational' ? '' : 'Consulta los servicios afectados.';
+  document.querySelector('#updated').textContent = `Última comprobación: ${date(data?.generatedAt)}`;
   const container = document.querySelector('#components');
   const expanded = new Set([...container.querySelectorAll('details[open]')].map(n=>n.dataset.component));
   container.replaceChildren();
@@ -36,7 +36,7 @@ function render() {
     const name=el('div',null,'service-name'),arrow=el('span','›','chevron');arrow.setAttribute('aria-hidden','true');name.append(arrow,el('h3',c.name));
     const badge=el('span',labels[c.shown],'badge');badge.dataset.state=c.shown;top.append(name,badge);
     const body=el('div',null,'service-details');
-    body.append(el('p',def?.scope),el('p',`Última comprobación: ${date(c.checkedAt)}${c.primary?.ms != null ? ` · ${c.primary.ms} ms desde GitHub` : ''}`));
+    body.append(el('p',def?.scope),el('p',`Última comprobación: ${date(c.checkedAt)}${c.primary?.ms != null ? ` · ${c.primary.ms} ms` : ''}`));
     if (c.shown === 'unverified' || c.status === 'incomplete') body.append(el('p',`Último resultado válido: ${labels[c.lastResult?.status] || 'Sin datos'} · ${date(c.lastResult?.at)}`));
     if (c.recovering) body.append(el('p','Recuperación en comprobación: falta una segunda ronda satisfactoria.'));
     if (c.regions?.length) body.append(el('p',c.regions.map(r=>`${r.region==='EU'?'Europa':'Norteamérica'}${r.city?` (${r.city})`:''}: ${{ok:'correcto',slow:'lento',fail:'error',unknown:'sin verificar'}[r.status]}`).join(' · ')));
@@ -45,9 +45,9 @@ function render() {
   const history = document.querySelector('#incidents');
   const openIncidents=new Set([...history.querySelectorAll('details[open]')].map(n=>n.dataset.incident));
   history.replaceChildren();
-  if (!data) history.append(el('p','Historial sin verificar. Consulta el repositorio de emergencia.','empty'));
+  if (!data) history.append(el('p','Historial sin verificar.','empty'));
   else if (!data.incidents?.length) {
-    const empty=el('div',null,'empty');empty.append(el('p','No hay incidencias publicadas.','empty-title'),el('p','Las incidencias confirmadas y los mantenimientos del equipo aparecerán aquí.'));history.append(empty);
+    const empty=el('div',null,'empty');empty.append(el('p','No hay incidencias publicadas.','empty-title'));history.append(empty);
   }
   for (const i of data?.incidents || []) {
     const article=el('article',null,'incident');
@@ -59,7 +59,7 @@ function render() {
     detail.append(el('pre',body));
     for (const u of i.updates || []) detail.append(el('p',date(u.at),'update-date'),el('pre',u.text));
     if(i.closedAt)detail.append(el('p',`Resuelta: ${date(i.closedAt)}`));
-    const a=el('a','Ver detalles y evidencia en GitHub ↗');a.href=`https://github.com/espectre00/slatedsk-status/issues/${Number(i.number)}`;detail.append(a);article.append(detail);history.append(article);
+    article.append(detail);history.append(article);
   }
 }
 async function refresh() {

@@ -35,7 +35,7 @@ try {
   await page.locator('[data-component="web"] > summary').click();
   fixture.components[0].primary={...fixture.components[0].primary,ms:987};
   await Promise.all([page.waitForResponse(r=>r.url().includes('/data/status.json')),page.evaluate(()=>document.dispatchEvent(new Event('visibilitychange')))]);
-  await page.getByText(/987 ms desde GitHub/).waitFor();
+  await page.getByText(/987 ms/).waitFor();
   assert.equal(await page.locator('[data-component="web"]').getAttribute('open'),'');
   fixture.incidents=[{number:1,title:'Mantenimiento de infraestructura',body:'Ventana prevista: 03:00–03:30 CET. <img src=x onerror=alert(1)>',createdAt:fixture.generatedAt,state:'open',manual:true,maintenance:true,updates:[]}];
   await page.setViewportSize({width:390,height:844});await load();

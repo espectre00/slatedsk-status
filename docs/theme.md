@@ -6,6 +6,8 @@ La jerarquía del estado general y los servicios desplegables se inspira en [Ope
 
 Las barras representan hasta 60 comprobaciones reales por componente, ordenadas por fecha, con las fechas y el número de registros visibles. Cada marca es una observación, no un día ni un intervalo de disponibilidad continua. Los espacios sin registros y las comprobaciones incompletas se muestran grises. No se publican porcentajes de uptime derivados de estas muestras.
 
+La interfaz se limita al estado, fecha de comprobación, servicios e incidencias. La metodología y las referencias operativas permanecen en la documentación del repositorio, sin un bloque de alcance, pie técnico ni enlaces a herramientas en la página pública.
+
 Implementación CSS independiente para la página pública; no importa ni publica módulos, hojas completas de estilos, lógica o datos de la aplicación privada. Los valores visuales seleccionados describen la identidad pública de la marca.
 
 El logotipo y favicon proceden de los recursos ya públicos de app.slatedsk.com. Las fuentes Plus Jakarta Sans se alojan aquí con su licencia SIL Open Font License en `site/assets/fonts/OFL.txt`. No hay peticiones al VPS ni a proveedores de fuentes para mostrar estos recursos.
