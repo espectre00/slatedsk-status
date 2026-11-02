@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-02T14:42:59.010Z",
+  "generatedAt": "2026-11-02T14:45:17.963Z",
   "repository": "https://github.com/espectre00/slatedsk-status",
   "components": [
     {
@@ -14,18 +14,18 @@
         "status": "ok",
         "reason": null,
         "code": 200,
-        "ms": 490
+        "ms": 517
       },
       "retry": null,
       "regions": [],
       "firstCheckedAt": "2026-11-02T14:36:36.301Z",
-      "checkedAt": "2026-11-02T14:42:56.476Z",
-      "lastValidAt": "2026-11-02T14:42:56.476Z",
+      "checkedAt": "2026-11-02T14:45:08.618Z",
+      "lastValidAt": "2026-11-02T14:45:08.618Z",
       "lastResult": {
         "status": "operational",
-        "at": "2026-11-02T14:42:56.476Z"
+        "at": "2026-11-02T14:45:08.618Z"
       },
-      "goodRounds": 3,
+      "goodRounds": 4,
       "activeIncident": false,
       "recovering": false
     },
@@ -40,18 +40,18 @@
         "status": "ok",
         "reason": null,
         "code": 200,
-        "ms": 641
+        "ms": 425
       },
       "retry": null,
       "regions": [],
       "firstCheckedAt": "2026-11-02T14:36:36.301Z",
-      "checkedAt": "2026-11-02T14:42:56.476Z",
-      "lastValidAt": "2026-11-02T14:42:56.476Z",
+      "checkedAt": "2026-11-02T14:45:08.618Z",
+      "lastValidAt": "2026-11-02T14:45:08.618Z",
       "lastResult": {
         "status": "operational",
-        "at": "2026-11-02T14:42:56.476Z"
+        "at": "2026-11-02T14:45:08.618Z"
       },
-      "goodRounds": 3,
+      "goodRounds": 4,
       "activeIncident": false,
       "recovering": false
     },
@@ -66,28 +66,38 @@
         "status": "unknown",
         "reason": "cache",
         "code": 200,
-        "ms": 321
+        "ms": 366
       },
       "retry": {
         "status": "unknown",
         "reason": "cache",
         "code": 200,
-        "ms": 297
+        "ms": 335
       },
       "regions": [
         {
           "region": "EU",
+          "country": "DE",
+          "city": "Falkenstein",
+          "measurementId": "2479R7qomn4FrGmnm00121Qkn",
           "status": "unknown",
-          "reason": "verification-unavailable"
+          "reason": "cache",
+          "code": 200,
+          "ms": 138
         },
         {
           "region": "NA",
+          "country": "US",
+          "city": "Buffalo",
+          "measurementId": "2yiRTuL0OJmwYoG1G00121Qkn",
           "status": "unknown",
-          "reason": "verification-unavailable"
+          "reason": "cache",
+          "code": 200,
+          "ms": 428
         }
       ],
       "firstCheckedAt": "2026-11-02T14:36:36.301Z",
-      "checkedAt": "2026-11-02T14:42:56.476Z",
+      "checkedAt": "2026-11-02T14:45:08.618Z",
       "lastValidAt": null,
       "lastResult": null,
       "goodRounds": 0,
@@ -105,28 +115,38 @@
         "status": "unknown",
         "reason": "cache",
         "code": 200,
-        "ms": 138
+        "ms": 308
       },
       "retry": {
         "status": "unknown",
         "reason": "cache",
         "code": 200,
-        "ms": 120
+        "ms": 134
       },
       "regions": [
         {
           "region": "EU",
+          "country": "DE",
+          "city": "Falkenstein",
+          "measurementId": "2MIqBSC5NjTffeIZo00121Qkn",
           "status": "unknown",
-          "reason": "verification-unavailable"
+          "reason": "cache",
+          "code": 200,
+          "ms": 216
         },
         {
           "region": "NA",
+          "country": "US",
+          "city": "Buffalo",
+          "measurementId": "2isNDBCfTcRAbxBXX00121Qkn",
           "status": "unknown",
-          "reason": "verification-unavailable"
+          "reason": "cache",
+          "code": 200,
+          "ms": 472
         }
       ],
       "firstCheckedAt": "2026-11-02T14:36:36.301Z",
-      "checkedAt": "2026-11-02T14:42:56.476Z",
+      "checkedAt": "2026-11-02T14:45:08.618Z",
       "lastValidAt": null,
       "lastResult": null,
       "goodRounds": 0,
