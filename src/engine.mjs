@@ -9,6 +9,7 @@ export function classify(primary, retry, regions) {
   if (!retry || primary.status === 'unknown' || retry.status === 'unknown') return 'incomplete';
   if (regions.length !== 2 || !['EU', 'NA'].every(r => regions.some(x => x.region === r && x.status !== 'unknown'))) return 'incomplete';
   const values = [primary, retry, ...regions].map(x => x.status);
+  if (values.every(x => x === 'ok')) return 'operational';
   if (values.every(x => x === 'fail')) return 'outage';
   if (values.every(x => x === 'ok' || x === 'slow') && primary.status === 'slow' && retry.status === 'slow') return 'degraded';
   if (retry.status === 'ok' && regions.every(x => x.status === 'ok')) return 'observation';

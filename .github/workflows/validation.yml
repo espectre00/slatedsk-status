@@ -1,0 +1,26 @@
+name: Ensayo seguro de incidencias
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+  issues: write
+concurrency:
+  group: status-validation
+  cancel-in-progress: false
+jobs:
+  roundtrip:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm test
+      - run: npm run audit:public
+      - run: node tests/github-roundtrip.mjs
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          GLOBALPING_TOKEN: ${{ secrets.GLOBALPING_TOKEN }}

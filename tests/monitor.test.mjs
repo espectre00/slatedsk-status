@@ -15,6 +15,7 @@ test('confirmación, discrepancia, lentitud, fallo aislado y sondas ausentes', (
   assert.equal(classify(point('fail'),point('fail'),regions('unknown','fail')), 'incomplete');
   assert.equal(classify(point('fail'),point('fail'),[]), 'incomplete');
   assert.equal(classify(point('ok'),null,[]), 'operational');
+  assert.equal(classify(point('ok'),point('ok'),regions('ok','ok')), 'operational');
 });
 test('recuperación requiere dos rondas contiguas y reinicia tras fallo o datos antiguos', () => {
   const down = transition({}, {status:'outage'}, at);
