@@ -15,6 +15,7 @@ async function round(url, previous) {
   const regions = [];
   for (const region of ['EU','NA']) regions.push(await gp.check(component,region));
   const at = new Date().toISOString();
+  console.log(JSON.stringify({at,primary,retry,regions}));
   return {...component,...transition(previous,{status:classify(primary,retry,regions),primary,retry,regions},at)};
 }
 const before = await testIssues();

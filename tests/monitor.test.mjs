@@ -65,7 +65,7 @@ test('cuota gratuita agotada no ejecuta POST ni declara caída', async () => {
 test('región y TLS se validan con respuestas reales del contrato Globalping', async () => {
   const mock=async(url,options)=>{
     if(url.endsWith('/limits'))return Response.json({rateLimit:{measurements:{create:{remaining:200}}}});
-    if(options.method==='POST') {const body=JSON.parse(options.body);assert.deepEqual(body.locations,[{continent:'EU',limit:1}]);return Response.json({id:'test'});}
+    if(options.method==='POST') {const body=JSON.parse(options.body);assert.deepEqual(body.locations,[{continent:'EU',limit:1}]);assert.equal(Object.hasOwn(body.measurementOptions.request,'query'),false);return Response.json({id:'test'});}
     return Response.json({status:'finished',results:[{probe:{continent:'EU',country:'ES',city:'Madrid'},result:{status:'finished',tls:{authorized:false},statusCode:200,rawBody:html,headers:{'content-type':'text/html'},timings:{total:20}}}]});
   };
   const gp=new Globalping('test',mock,async()=>{});
