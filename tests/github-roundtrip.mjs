@@ -35,7 +35,7 @@ assert.equal(second.goodRounds,2);
 await gh.sync([second],second.checkedAt);
 const final = (await testIssues()).find(i=>i.number===opened[0].number);
 assert.equal(final.state,'closed');
-assert.ok((await gh.all(`issues/${final.number}/comments`)).some(c=>c.body.includes('dos rondas')));
+assert.ok((await gh.all(`issues/${final.number}/comments`)).some(c=>c.body.includes('two consecutive successful rounds')));
 assert.ok(!(await gh.publicIncidents()).some(i=>i.number===final.number),'El ensayo no debe publicarse como incidencia del servicio');
 assert.equal(await gh.trusted('espectre00'),true);
 console.log(JSON.stringify({passed:true,issue:final.html_url,duplicate:false,recoveryRounds:2,retained:true,publicServiceIncident:false,regions:second.regions.map(r=>({region:r.region,city:r.city,status:r.status,measurementId:r.measurementId}))},null,2));

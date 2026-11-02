@@ -44,13 +44,13 @@ export class GitHub {
         if (component.goodRounds < 2) component.status = 'partial';
       }
       const evidence = JSON.stringify({ checkedAt: at, primary: component.primary, retry: component.retry, regions: component.regions });
-      const body = `${marker}\n${labels[component.status]}\n\nÚltima comprobación: ${at}.\n\nCausa pendiente de confirmación. Estas pruebas no validan login, facturación ni todas las operaciones.\n\nEvidencia pública:\n\n\`\`\`json\n${evidence}\n\`\`\``;
+      const body = `${marker}\n${labels[component.status]}\n\nLast checked: ${at}.\n\nCause not yet confirmed. These checks do not validate sign-in, billing or every operation.\n\nPublic evidence:\n\n\`\`\`json\n${evidence}\n\`\`\``;
       if (component.activeIncident && !issue) {
         issue = await this.api('issues', 'POST', { title: `${component.name}: ${labels[component.status]}`, body });
         this.recentIssues.set(issue.number, issue);
         issues.push(issue);
       } else if (issue && component.goodRounds >= 2) {
-        await this.api(`issues/${issue.number}/comments`, 'POST', { body: `Recuperación verificada tras dos rondas consecutivas satisfactorias. ${at}` });
+        await this.api(`issues/${issue.number}/comments`, 'POST', { body: `Recovery verified after two consecutive successful rounds. ${at}` });
         await this.api(`issues/${issue.number}`, 'PATCH', { state: 'closed', state_reason: 'completed' });
         issue.state = 'closed'; issue.closed_at = at;
         this.recentIssues.set(issue.number, issue);

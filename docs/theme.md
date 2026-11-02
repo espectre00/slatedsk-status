@@ -8,6 +8,8 @@ Las barras representan hasta 60 comprobaciones reales por componente, ordenadas 
 
 La interfaz se limita al estado, fecha de comprobación, servicios e incidencias. La metodología y las referencias operativas permanecen en la documentación del repositorio, sin un bloque de alcance, pie técnico ni enlaces a herramientas en la página pública.
 
+La interfaz pública está en inglés, con fechas en formato en-GB. El estado correcto se presenta como Operational; los datos antiguos conservan Unverified. Las nuevas incidencias automáticas y plantillas manuales también usan inglés. Los textos históricos escritos por el equipo se conservan tal como fueron publicados.
+
 Implementación CSS independiente para la página pública; no importa ni publica módulos, hojas completas de estilos, lógica o datos de la aplicación privada. Los valores visuales seleccionados describen la identidad pública de la marca.
 
 El logotipo y favicon proceden de los recursos ya públicos de app.slatedsk.com. Las fuentes Plus Jakarta Sans se alojan aquí con su licencia SIL Open Font License en `site/assets/fonts/OFL.txt`. No hay peticiones al VPS ni a proveedores de fuentes para mostrar estos recursos.

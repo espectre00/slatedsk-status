@@ -1,19 +1,19 @@
-name: Mantenimiento programado
-description: Aviso público del equipo de SlateDsk.
-title: '[Mantenimiento] '
+name: Scheduled maintenance
+description: Public notice from the SlateDsk team.
+title: '[Maintenance] '
 body:
   - type: markdown
     attributes:
-      value: 'Un colaborador con escritura debe añadir status-published y maintenance. El aviso permanece visible hasta cerrar el Issue. Aclara si está previsto, en curso o terminado.'
+      value: 'A collaborator with write access must add status-published and maintenance. The notice remains visible until the issue is closed. Specify whether it is planned, in progress or completed.'
   - type: textarea
     id: window
     attributes:
-      label: Inicio y fin previstos, con zona horaria
+      label: Scheduled start and end, including time zone
     validations:
       required: true
   - type: textarea
     id: impact
     attributes:
-      label: Componentes, impacto esperado y situación actual
+      label: Components, expected impact and current status
     validations:
       required: true
