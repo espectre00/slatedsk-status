@@ -1,6 +1,6 @@
 # Identidad visual
 
-La página reproduce el tema oscuro actual de SlateDsk: Plus Jakarta Sans, fondo #040507, texto #edf0f8, superficies #1a1e27 y #242936, acento #5558d6, paneles translúcidos, barra superior redondeada y sombras suaves.
+La página utiliza la identidad oscura de SlateDsk: Plus Jakarta Sans, texto #edf0f8 y acento #5558d6. El fondo combina el degradado índigo/violeta de la marca sobre negro con estrellas pequeñas y estáticas. La información se organiza en secciones abiertas y filas con separadores finos, sin tarjetas, cápsulas ni sombras decorativas.
 
 Implementación CSS independiente para la página pública; no importa ni publica módulos, hojas completas de estilos, lógica o datos de la aplicación privada. Los valores visuales seleccionados describen la identidad pública de la marca.
 

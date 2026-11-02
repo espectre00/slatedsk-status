@@ -26,6 +26,7 @@ try {
   await load();assert.equal(await page.locator('#headline').textContent(),'Estado sin verificar');
   fixture.generatedAt=new Date().toISOString();fixture.components=fixture.components.map(c=>({...c,status:'operational',lastValidAt:fixture.generatedAt,checkedAt:fixture.generatedAt,lastResult:{status:'operational',at:fixture.generatedAt}}));
   await load();assert.equal(await page.locator('#headline').textContent(),'Comprobaciones correctas');
+  await page.screenshot({path:'out/desktop-preview.png'});
   await page.screenshot({path:'out/desktop.png',fullPage:true});
   fixture.incidents=[{number:1,title:'Mantenimiento de infraestructura',body:'Ventana prevista: 03:00–03:30 CET. <img src=x onerror=alert(1)>',createdAt:fixture.generatedAt,state:'open',manual:true,maintenance:true,updates:[]}];
   await page.setViewportSize({width:390,height:844});await load();
