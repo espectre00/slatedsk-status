@@ -1,0 +1,24 @@
+owner: espectre00
+repo: slatedsk-status
+skipDeleteIssues: true
+skipDescriptionUpdate: true
+skipTopicsUpdate: true
+skipHomepageUpdate: true
+sites:
+  - name: Web pública
+    slug: web
+    url: https://slatedsk.com
+  - name: Acceso a la aplicación
+    slug: app
+    url: https://app.slatedsk.com
+  - name: API
+    slug: api
+    url: https://api.slatedsk.com/health
+  - name: Conexión con datos
+    slug: data
+    url: https://api.slatedsk.com/ready
+status-website:
+  cname: status.slatedsk.com
+  name: Estado de SlateDsk
+# Fork de Upptime: status.yml controla confirmación y publicación.
+# No activar los workflows originales: abrirían incidencias sin confirmación.

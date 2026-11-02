@@ -1,0 +1,23 @@
+name: Incidencia o actualización pública
+description: Publicación del equipo autorizado; nunca incluir datos personales ni secretos.
+title: '[Incidencia] '
+body:
+  - type: markdown
+    attributes:
+      value: 'Solo se publica cuando un colaborador con escritura crea el aviso y añade status-published. Los comentarios de colaboradores autorizados se publican como actualizaciones.'
+  - type: textarea
+    id: impact
+    attributes:
+      label: Impacto y componentes afectados
+    validations:
+      required: true
+  - type: textarea
+    id: update
+    attributes:
+      label: Situación actual y próxima actualización (hora con zona)
+    validations:
+      required: true
+  - type: textarea
+    id: cause
+    attributes:
+      label: Causa confirmada, o pendiente de confirmar

@@ -1,0 +1,65 @@
+name: Comprobar y publicar estado
+on:
+  schedule:
+    - cron: '2-59/5 * * * *'
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths-ignore: ['history/**', 'site/data/**', 'README.md']
+  issues:
+    types: [opened, edited, closed, reopened, labeled, unlabeled]
+  issue_comment:
+    types: [created, edited, deleted]
+permissions:
+  contents: read
+concurrency:
+  group: status-production
+  cancel-in-progress: false
+jobs:
+  monitor:
+    # Nunca se ejecuta código de PRs. Issues públicos no pueden disparar escrituras.
+    if: >-
+      github.event_name != 'issues' && github.event_name != 'issue_comment' ||
+      contains(fromJSON('["OWNER","MEMBER","COLLABORATOR"]'), github.event.issue.author_association) &&
+      contains(fromJSON('["OWNER","MEMBER","COLLABORATOR"]'), github.event.comment.author_association || github.event.issue.author_association)
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    permissions:
+      contents: write
+      issues: write
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm test
+      - run: npm run audit:public
+      - run: npm run monitor
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          GLOBALPING_TOKEN: ${{ secrets.GLOBALPING_TOKEN }}
+      - run: npm run audit:public
+      - name: Versionar resultados antes de publicar
+        run: |
+          git config user.name 'slatedsk-status'
+          git config user.email 'status@users.noreply.github.com'
+          git add site/data history README.md
+          if ! git diff --cached --quiet; then
+            git commit -m 'chore: update public status results'
+            git push origin HEAD:main
+          fi
+      - run: npm run build
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+      - name: Publicar
+        id: deployment
+        uses: actions/deploy-pages@v4

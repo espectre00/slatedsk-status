@@ -1,0 +1,14 @@
+<!doctype html>
+<html lang="es">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#111216"><meta name="description" content="Estado público de SlateDsk, alcance de las comprobaciones e historial de incidencias."><title>Estado de SlateDsk</title><link rel="icon" href="./mark.svg"><link rel="stylesheet" href="./style.css"></head>
+<body>
+<header><a href="./" class="brand"><img src="./mark.svg" width="32" height="32" alt="">SlateDsk <span> / Estado</span></a><a id="emergency" href="https://github.com/espectre00/slatedsk-status">Repositorio de emergencia ↗</a></header>
+<main>
+<div class="eyebrow">TRANSPARENCIA OPERATIVA</div><h1>Así está SlateDsk.</h1><p class="intro">Comprobaciones reales de nuestros servicios públicos.<br>La información que necesitas, con sus límites a la vista.</p>
+<section id="overall" class="summary" aria-live="polite"><div class="status-line"><span class="dot"></span><h2 id="headline">Estado sin verificar</h2></div><p id="summary-detail">Esperando datos de las comprobaciones.</p><p id="updated" class="meta">Sin comprobaciones disponibles.</p></section>
+<section aria-labelledby="services-title"><div class="section-heading"><h2 id="services-title">Servicios</h2><span>Comprobaciones cada ≈ 5 min</span></div><div id="components" class="services"></div></section>
+<section aria-labelledby="incidents-title"><div class="section-heading"><h2 id="incidents-title">Incidencias y mantenimientos</h2><a href="https://github.com/espectre00/slatedsk-status/issues">Ver en GitHub ↗</a></div><div id="incidents"><p class="empty">Historial pendiente de cargar.</p></div></section>
+<section class="scope"><h2>Qué significa este estado</h2><p>Comprobamos las direcciones públicas por el mismo acceso que utilizan los clientes. Ante errores o lentitud, repetimos la prueba y contrastamos desde Europa y Norteamérica.</p><p>Estas pruebas no garantizan que funcionen el inicio de sesión, la facturación ni todas las operaciones. Una incidencia confirmada describe las ubicaciones comprobadas; la causa solo se publica cuando se confirma.</p><p>GitHub puede retrasar las ejecuciones. Tras 15 minutos sin datos válidos, el estado pasa a <strong>sin verificar</strong>. Si falla este dominio, consulta el repositorio de emergencia.</p></section>
+<noscript><p class="empty">Activa JavaScript para consultar fechas y resultados. Puedes leer el último resumen en el repositorio de emergencia; comprueba siempre su fecha.</p></noscript>
+</main><footer><span>SlateDsk · Estado público</span><a href="./data/status.json">Datos abiertos JSON ↗</a><span>Comprobado desde GitHub · Contraste con Globalping</span></footer><script type="module" src="./app.mjs"></script>
+</body></html>

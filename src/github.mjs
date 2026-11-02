@@ -1,0 +1,69 @@
+import { labels } from './config.mjs';
+export class GitHub {
+  constructor(repo, token, fetcher = fetch) { this.repo = repo; this.token = token; this.fetcher = fetcher; this.permissions = new Map(); }
+  async api(path, method = 'GET', body) {
+    const response = await this.fetcher(`https://api.github.com/repos/${this.repo}/${path}`, { method, signal: AbortSignal.timeout(20_000), headers: { Authorization: `Bearer ${this.token}`, Accept: 'application/vnd.github+json', 'X-GitHub-Api-Version': '2022-11-28', 'Content-Type': 'application/json' }, body: body === undefined ? undefined : JSON.stringify(body) });
+    if (!response.ok) throw new Error(`GitHub ${response.status}: ${path.split('?')[0]}`);
+    return response.status === 204 ? null : response.json();
+  }
+  async all(path) {
+    const out = [];
+    for (let page = 1; ; page++) {
+      const rows = await this.api(`${path}${path.includes('?') ? '&' : '?'}per_page=100&page=${page}`);
+      out.push(...rows);
+      if (rows.length < 100) return out;
+    }
+  }
+  async trusted(login) {
+    if (!this.permissions.has(login)) {
+      try { const p = await this.api(`collaborators/${encodeURIComponent(login)}/permission`); this.permissions.set(login, ['admin', 'maintain', 'write'].includes(p.permission)); }
+      catch { this.permissions.set(login, false); }
+    }
+    return this.permissions.get(login);
+  }
+  async sync(components, at) {
+    const issues = (await this.all('issues?state=all')).filter(i => !i.pull_request);
+    for (const component of components) {
+      const marker = `<!-- slatedsk-monitor:${component.id} -->`;
+      const matching = issues.filter(i => i.user.login === 'github-actions[bot]' && i.body?.includes(marker));
+      const opened = matching.filter(i => i.state === 'open');
+      if (opened.length > 1) throw new Error(`Duplicate incidents: ${component.id}`);
+      let issue = opened[0];
+      // Issues sirven de diario si se creó el aviso pero falló el commit anterior.
+      if (!component.activeIncident && issue) {
+        component.activeIncident = true;
+        // Un aviso desconocido por el snapshot indica publicación anterior fallida.
+        // No reutilizar una racha verde anterior a la apertura.
+        component.goodRounds = component.recovering === false && component.regions?.length === 2 ? component.goodRounds : 0;
+        if (component.goodRounds < 2) component.status = 'partial';
+      }
+      const evidence = JSON.stringify({ checkedAt: at, primary: component.primary, retry: component.retry, regions: component.regions });
+      const body = `${marker}\n${labels[component.status]}\n\nÚltima comprobación: ${at}.\n\nCausa pendiente de confirmación. Estas pruebas no validan login, facturación ni todas las operaciones.\n\nEvidencia pública:\n\n\`\`\`json\n${evidence}\n\`\`\``;
+      if (component.activeIncident && !issue) {
+        issue = await this.api('issues', 'POST', { title: `${component.name}: ${labels[component.status]}`, body });
+        issues.push(issue);
+      } else if (issue && component.goodRounds >= 2) {
+        await this.api(`issues/${issue.number}/comments`, 'POST', { body: `Recuperación verificada tras dos rondas consecutivas satisfactorias. ${at}` });
+        await this.api(`issues/${issue.number}`, 'PATCH', { state: 'closed', state_reason: 'completed' });
+        component.activeIncident = false;
+        component.status = 'operational';
+      } else if (issue) {
+        await this.api(`issues/${issue.number}`, 'PATCH', { body });
+      }
+    }
+    return this.publicIncidents();
+  }
+  async publicIncidents() {
+    const out = [];
+    for (const issue of (await this.all('issues?state=all')).filter(i => !i.pull_request)) {
+      const automatic = issue.user.login === 'github-actions[bot]' && /<!-- slatedsk-monitor:(web|app|api|data) -->/.test(issue.body || '');
+      const manual = issue.labels.some(l => l.name === 'status-published') && await this.trusted(issue.user.login);
+      if (!automatic && !manual) continue;
+      const comments = await this.all(`issues/${issue.number}/comments`);
+      const updates = [];
+      for (const c of comments) if (c.user.login === 'github-actions[bot]' || await this.trusted(c.user.login)) updates.push({ at: c.created_at, text: c.body.slice(0, 6000) });
+      out.push({ number: issue.number, title: issue.title, body: issue.body?.slice(0, 12000), url: issue.html_url, state: issue.state, createdAt: issue.created_at, closedAt: issue.closed_at, maintenance: manual && issue.labels.some(l => l.name === 'maintenance'), manual, updates });
+    }
+    return out.sort((a,b) => Date.parse(b.createdAt) - Date.parse(a.createdAt));
+  }
+}
