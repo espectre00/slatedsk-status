@@ -5,7 +5,16 @@
 Repositorio de emergencia independiente de la aplicación. Comprueba web, HTML/JavaScript de acceso, salud de API y conexión con datos. No garantiza login, facturación ni todas las operaciones.
 
 <!-- live:start -->
-**Estado sin verificar.** Todavía no se han publicado comprobaciones reales.
+Última ronda: **2026-11-02T14:36:36.301Z**. Tras 15 minutos este resumen debe considerarse **sin verificar**.
+
+| Componente | Último resultado |
+|---|---|
+| Web pública | Comprobaciones correctas |
+| Acceso a la aplicación | Comprobaciones correctas |
+| API | Verificación incompleta |
+| Conexión con datos | Verificación incompleta |
+
+[Incidencias y actualizaciones](https://github.com/espectre00/slatedsk-status/issues) · [Datos con fechas y regiones](site/data/status.json)
 <!-- live:end -->
 
 Una ronda tiene vigencia de 15 minutos. Lee SIEMPRE su fecha: GitHub puede retrasar o detener las automatizaciones. El README conserva el último resultado y no puede cambiar por sí solo cuando el monitor está detenido. La página detecta antigüedad también en el navegador.
