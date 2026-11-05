@@ -42,3 +42,15 @@ Hay ejecuciones automáticas, pero no mantienen la frecuencia prevista. Por ejem
 Además, [41937637989](https://github.com/espectre00/slatedsk-status/actions/runs/41937637989) comprobó y versionó los resultados, pero Pages permaneció en `updating_pages` hasta agotar el tiempo de espera. Las publicaciones posteriores terminaron correctamente. Es un fallo distinto de la ausencia de eventos frecuentes.
 
 Se vuelve a registrar la automatización como `monitor.yml`, desplazando el horario a los minutos 2, 7, 12… para evitar el inicio de la hora. La recuperación exige observar ejecuciones `schedule` posteriores con datos publicados recientes; una ejecución manual o por push no acredita esa recuperación. Se mantiene el límite de quince minutos y la visualización de datos antiguos como Unverified.
+
+## Integración del reloj externo
+
+Veinte pruebas locales correctas, incluyendo exclusión de duplicados, publicación fallida después del commit, datos incompletos/futuros y ejecución manual forzada. Auditoría pública sin hallazgos. El despliegue [42077834545](https://github.com/espectre00/slatedsk-status/actions/runs/42077834545) terminó correctamente. El disparo de validación [42078030915](https://github.com/espectre00/slatedsk-status/actions/runs/42078030915) omitió la ronda al comprobar que main y Pages ya contenían la misma ronda reciente.
+
+El usuario autorizó una clave dedicada de Actions limitada al repositorio público de estado, configurada solo en la cabecera privada del reloj externo. No se almacena en Git ni en la web. La prueba real desde cron-job.org obtuvo HTTP 204 y creó [42078891884](https://github.com/espectre00/slatedsk-status/actions/runs/42078891884), que comprobó los cuatro servicios y publicó datos a las 17:53:04 UTC.
+
+Primer disparo automático: programado a las 17:55:00 UTC y ejecutado a las 17:55:17, con HTTP 204. Creó [42079289516](https://github.com/espectre00/slatedsk-status/actions/runs/42079289516) sin intervención manual. Actions omitió correctamente la ronda, porque la prueba anterior había publicado el mismo snapshot hacía menos de cuatro minutos.
+
+Segundo disparo automático: programado a las 18:00:00 UTC y ejecutado a las 18:00:52, también con HTTP 204. Creó [42080159029](https://github.com/espectre00/slatedsk-status/actions/runs/42080159029), que completó pruebas, auditorías, comprobaciones, commit y publicación. El JSON público servido por HTTPS se leyó con `generatedAt` **2026-11-05T18:01:09.874Z** y los cuatro componentes Operational. Los dos disparos del reloj y la nueva publicación están verificados; no se atribuye esta recuperación al cron original de GitHub.
+
+La tarea permanece habilitada cada cinco minutos, sin guardar respuestas en su historial. Se mantienen el diseño existente, los Issues, la confirmación regional y la caducidad de quince minutos. Los retrasos observados de 17 y 52 segundos recuerdan que tampoco el reloj externo ofrece puntualidad garantizada.

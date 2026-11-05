@@ -19,6 +19,8 @@ Crear un único trabajo «SlateDsk status · every 5 minutes» con:
 
 La clave debe ser un fine-grained personal access token de GitHub dedicado, con acceso **solo** a `espectre00/slatedsk-status` y permiso **Actions: read and write**; Metadata de lectura es implícito. No conceder Contents, acceso a otros repositorios ni reutilizar la sesión de gh, tokens privados o Globalping. Guardar la clave solo en la cabecera privada de este trabajo; nunca en la URL, Git, capturas, chat ni archivos públicos. Registrar la caducidad y renovar antes de que venza. Revocarla al retirar el reloj.
 
+La credencial inicial caduca el **5 de noviembre de 2027** (fecha de GitHub, Europe/Madrid). Renovarla antes de esa fecha y verificar de nuevo dos disparos del reloj. La renovación se hace en las cuentas del responsable, sin publicar la nueva clave.
+
 No guardar cuerpos/cabeceras de respuesta en el historial del trabajo. Activar avisos gratuitos de fallo, recuperación y desactivación para la cuenta responsable. Estos avisos detectan rechazo del disparo, no acreditan que la comprobación y la publicación hayan finalizado.
 
 ## Comprobación antes de activar
