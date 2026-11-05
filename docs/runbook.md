@@ -26,6 +26,8 @@ Si una ejecución falla: revisar primero el paso fallido y permisos de contents/
 
 Si cron deja de ejecutarse, abrir Actions, rehabilitar el workflow cuando GitHub lo haya desactivado y ejecutar manualmente. Comprobar nuevas fechas tanto en Git como en Pages; un commit reciente por sí solo no demuestra que Pages se haya publicado. Verificar dos rondas si había incidencia abierta.
 
+El workflow actual es `.github/workflows/monitor.yml`. Si está activo pero los eventos `schedule` llegan separados por horas, distinguir ese problema de una ejecución que falla: revisar fechas de creación de las ejecuciones, no solo commits o despliegues. Un lanzamiento manual recupera los datos, pero no demuestra recuperación del programador. Volver a registrar el workflow y cambiar el horario es un intento de recuperación, no una garantía. Si persiste, escalar a GitHub o usar un disparador externo gratuito autenticado; no ampliar la vigencia de los datos para ocultar la falta de comprobaciones.
+
 ## Acceso de emergencia
 
 Usar `https://github.com/espectre00/slatedsk-status`, leer la fecha del resumen y los Issues. **Después de 15 minutos el resumen no acredita el estado actual**, aunque sus palabras indiquen que la última ronda fue correcta. GitHub no puede actualizar un README cuando Actions está detenido. Si GitHub también falla, esta solución no proporciona un canal independiente adicional.

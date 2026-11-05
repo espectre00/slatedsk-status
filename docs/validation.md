@@ -35,4 +35,10 @@ Los intentos iniciales permitieron corregir dos diferencias reales con las simul
 
 La API ya devuelve no-store en producción. Una lectura pública a las 15:05 UTC verificó los cuatro componentes: web y acceso HTML/JS correctos, salud JSON correcta y disponibilidad de datos correcta, todos con HTTP 200. El despliegue del cambio de caché terminó correctamente después de las pruebas del repositorio privado. No se han publicado fuentes ni registros de ese repositorio.
 
-Pendiente externo: observar la primera ejecución por cron. El workflow está activo y las ejecuciones manuales funcionan; no se presenta esto como prueba de que el programador ya haya ejecutado una ronda. GitHub puede retrasar el horario configurado.
+## Incidencia del programador: 5 de noviembre de 2026
+
+Hay ejecuciones automáticas, pero no mantienen la frecuencia prevista. Por ejemplo, [41980098561](https://github.com/espectre00/slatedsk-status/actions/runs/41980098561) se creó a las 06:23:34 UTC y [42049052566](https://github.com/espectre00/slatedsk-status/actions/runs/42049052566) a las 14:51:18 UTC: más de ocho horas entre eventos `schedule`, pese a la configuración cada cinco minutos. Ambas finalizaron correctamente. El repositorio es público, no es un fork, main es la rama por defecto y Actions y el workflow estaban activos. No hay evidencia suficiente para atribuir la causa interna a GitHub.
+
+Además, [41937637989](https://github.com/espectre00/slatedsk-status/actions/runs/41937637989) comprobó y versionó los resultados, pero Pages permaneció en `updating_pages` hasta agotar el tiempo de espera. Las publicaciones posteriores terminaron correctamente. Es un fallo distinto de la ausencia de eventos frecuentes.
+
+Se vuelve a registrar la automatización como `monitor.yml`, desplazando el horario a los minutos 2, 7, 12… para evitar el inicio de la hora. La recuperación exige observar ejecuciones `schedule` posteriores con datos publicados recientes; una ejecución manual o por push no acredita esa recuperación. Se mantiene el límite de quince minutos y la visualización de datos antiguos como Unverified.
