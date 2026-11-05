@@ -4,6 +4,11 @@ on:
     # Evita el inicio de la hora; GitHub puede retrasar o descartar eventos.
     - cron: '2-59/5 * * * *'
   workflow_dispatch:
+    inputs:
+      only_if_due:
+        description: 'Skip only when an identical recent check is already published'
+        type: boolean
+        default: false
   push:
     branches: [main]
     paths-ignore: ['history/**', 'site/data/**', 'README.md']
@@ -40,14 +45,24 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
+      - name: Evitar rondas periódicas duplicadas
+        id: gate
+        run: node src/monitor-gate.mjs
+        env:
+          INPUT_ONLY_IF_DUE: ${{ inputs.only_if_due }}
       - run: npm test
+        if: steps.gate.outputs.run == 'true'
       - run: npm run audit:public
+        if: steps.gate.outputs.run == 'true'
       - run: npm run monitor
+        if: steps.gate.outputs.run == 'true'
         env:
           GITHUB_TOKEN: ${{ github.token }}
           GLOBALPING_TOKEN: ${{ secrets.GLOBALPING_TOKEN }}
       - run: npm run audit:public
+        if: steps.gate.outputs.run == 'true'
       - name: Versionar resultados antes de publicar
+        if: steps.gate.outputs.run == 'true'
         run: |
           git config user.name 'slatedsk-status'
           git config user.email 'status@users.noreply.github.com'
@@ -57,10 +72,14 @@ jobs:
             git push origin HEAD:main
           fi
       - run: npm run build
+        if: steps.gate.outputs.run == 'true'
       - uses: actions/configure-pages@v5
+        if: steps.gate.outputs.run == 'true'
       - uses: actions/upload-pages-artifact@v3
+        if: steps.gate.outputs.run == 'true'
         with:
           path: dist
       - name: Publicar
+        if: steps.gate.outputs.run == 'true'
         id: deployment
         uses: actions/deploy-pages@v4
