@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-07T04:55:33.939Z",
+  "generatedAt": "2026-11-07T05:01:07.187Z",
   "repository": "https://github.com/espectre00/slatedsk-status",
   "components": [
     {
@@ -14,18 +14,18 @@
         "status": "ok",
         "reason": null,
         "code": 200,
-        "ms": 651
+        "ms": 509
       },
       "retry": null,
       "regions": [],
       "firstCheckedAt": "2026-11-02T14:36:36.301Z",
-      "checkedAt": "2026-11-07T04:55:31.399Z",
-      "lastValidAt": "2026-11-07T04:55:31.399Z",
+      "checkedAt": "2026-11-07T05:01:05.049Z",
+      "lastValidAt": "2026-11-07T05:01:05.049Z",
       "lastResult": {
         "status": "operational",
-        "at": "2026-11-07T04:55:31.399Z"
+        "at": "2026-11-07T05:01:05.049Z"
       },
-      "goodRounds": 410,
+      "goodRounds": 411,
       "activeIncident": false,
       "recovering": false
     },
@@ -40,18 +40,18 @@
         "status": "ok",
         "reason": null,
         "code": 200,
-        "ms": 499
+        "ms": 374
       },
       "retry": null,
       "regions": [],
       "firstCheckedAt": "2026-11-02T14:36:36.301Z",
-      "checkedAt": "2026-11-07T04:55:31.399Z",
-      "lastValidAt": "2026-11-07T04:55:31.399Z",
+      "checkedAt": "2026-11-07T05:01:05.049Z",
+      "lastValidAt": "2026-11-07T05:01:05.049Z",
       "lastResult": {
         "status": "operational",
-        "at": "2026-11-07T04:55:31.399Z"
+        "at": "2026-11-07T05:01:05.049Z"
       },
-      "goodRounds": 410,
+      "goodRounds": 411,
       "activeIncident": false,
       "recovering": false
     },
@@ -66,18 +66,18 @@
         "status": "ok",
         "reason": null,
         "code": 200,
-        "ms": 453
+        "ms": 347
       },
       "retry": null,
       "regions": [],
       "firstCheckedAt": "2026-11-02T14:36:36.301Z",
-      "checkedAt": "2026-11-07T04:55:31.399Z",
-      "lastValidAt": "2026-11-07T04:55:31.399Z",
+      "checkedAt": "2026-11-07T05:01:05.049Z",
+      "lastValidAt": "2026-11-07T05:01:05.049Z",
       "lastResult": {
         "status": "operational",
-        "at": "2026-11-07T04:55:31.399Z"
+        "at": "2026-11-07T05:01:05.049Z"
       },
-      "goodRounds": 410,
+      "goodRounds": 411,
       "activeIncident": false,
       "recovering": false
     },
@@ -92,18 +92,18 @@
         "status": "ok",
         "reason": null,
         "code": 200,
-        "ms": 319
+        "ms": 297
       },
       "retry": null,
       "regions": [],
       "firstCheckedAt": "2026-11-02T14:36:36.301Z",
-      "checkedAt": "2026-11-07T04:55:31.399Z",
-      "lastValidAt": "2026-11-07T04:55:31.399Z",
+      "checkedAt": "2026-11-07T05:01:05.049Z",
+      "lastValidAt": "2026-11-07T05:01:05.049Z",
       "lastResult": {
         "status": "operational",
-        "at": "2026-11-07T04:55:31.399Z"
+        "at": "2026-11-07T05:01:05.049Z"
       },
-      "goodRounds": 410,
+      "goodRounds": 411,
       "activeIncident": false,
       "recovering": false
     }
@@ -111,11 +111,6 @@
   "incidents": [],
   "history": {
     "web": [
-      {
-        "at": "2026-11-07T00:01:05.566Z",
-        "status": "operational",
-        "ms": 665
-      },
       {
         "at": "2026-11-07T00:05:30.855Z",
         "status": "operational",
@@ -410,14 +405,14 @@
         "at": "2026-11-07T04:55:31.399Z",
         "status": "operational",
         "ms": 651
+      },
+      {
+        "at": "2026-11-07T05:01:05.049Z",
+        "status": "operational",
+        "ms": 509
       }
     ],
     "app": [
-      {
-        "at": "2026-11-07T00:01:05.566Z",
-        "status": "operational",
-        "ms": 821
-      },
       {
         "at": "2026-11-07T00:05:30.855Z",
         "status": "operational",
@@ -712,14 +707,14 @@
         "at": "2026-11-07T04:55:31.399Z",
         "status": "operational",
         "ms": 499
+      },
+      {
+        "at": "2026-11-07T05:01:05.049Z",
+        "status": "operational",
+        "ms": 374
       }
     ],
     "api": [
-      {
-        "at": "2026-11-07T00:01:05.566Z",
-        "status": "operational",
-        "ms": 481
-      },
       {
         "at": "2026-11-07T00:05:30.855Z",
         "status": "operational",
@@ -1014,14 +1009,14 @@
         "at": "2026-11-07T04:55:31.399Z",
         "status": "operational",
         "ms": 453
+      },
+      {
+        "at": "2026-11-07T05:01:05.049Z",
+        "status": "operational",
+        "ms": 347
       }
     ],
     "data": [
-      {
-        "at": "2026-11-07T00:01:05.566Z",
-        "status": "operational",
-        "ms": 663
-      },
       {
         "at": "2026-11-07T00:05:30.855Z",
         "status": "operational",
@@ -1316,6 +1311,11 @@
         "at": "2026-11-07T04:55:31.399Z",
         "status": "operational",
         "ms": 319
+      },
+      {
+        "at": "2026-11-07T05:01:05.049Z",
+        "status": "operational",
+        "ms": 297
       }
     ]
   }
