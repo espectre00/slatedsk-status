@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-18T17:55:41.892Z",
+  "generatedAt": "2026-11-18T18:01:45.288Z",
   "repository": "https://github.com/espectre00/slatedsk-status",
   "components": [
     {
@@ -14,18 +14,18 @@
         "status": "ok",
         "reason": null,
         "code": 200,
-        "ms": 463
+        "ms": 1044
       },
       "retry": null,
       "regions": [],
       "firstCheckedAt": "2026-11-02T14:36:36.301Z",
-      "checkedAt": "2026-11-18T17:55:38.428Z",
-      "lastValidAt": "2026-11-18T17:55:38.428Z",
+      "checkedAt": "2026-11-18T18:01:15.133Z",
+      "lastValidAt": "2026-11-18T18:01:15.133Z",
       "lastResult": {
         "status": "operational",
-        "at": "2026-11-18T17:55:38.428Z"
+        "at": "2026-11-18T18:01:15.133Z"
       },
-      "goodRounds": 265,
+      "goodRounds": 266,
       "activeIncident": false,
       "recovering": false
     },
@@ -35,24 +35,52 @@
       "url": "https://app.slatedsk.com",
       "kind": "app",
       "scope": "HTML y JavaScript principal accesibles. No comprueba el inicio de sesión.",
-      "status": "operational",
+      "status": "partial",
       "primary": {
-        "status": "ok",
+        "status": "slow",
         "reason": null,
         "code": 200,
-        "ms": 600
+        "ms": 16282
       },
-      "retry": null,
-      "regions": [],
+      "retry": {
+        "status": "fail",
+        "reason": "ECONNRESET",
+        "code": null,
+        "ms": null
+      },
+      "regions": [
+        {
+          "region": "EU",
+          "country": "FI",
+          "city": "Helsinki",
+          "measurementId": "2zth4paRWTKsVOWis00121WnZ",
+          "status": "ok",
+          "reason": null,
+          "code": 200,
+          "ms": 598,
+          "assetMeasurementId": "2zpjdNFvPSwdNFKxu00121WnZ"
+        },
+        {
+          "region": "NA",
+          "country": "US",
+          "city": "Los Angeles",
+          "measurementId": "2dY14hN7XhE6ldh5f00121WnZ",
+          "status": "ok",
+          "reason": null,
+          "code": 200,
+          "ms": 1138,
+          "assetMeasurementId": "21IYQPLLI1z9iWGW800121WnZ"
+        }
+      ],
       "firstCheckedAt": "2026-11-02T14:36:36.301Z",
-      "checkedAt": "2026-11-18T17:55:38.428Z",
-      "lastValidAt": "2026-11-18T17:55:38.428Z",
+      "checkedAt": "2026-11-18T18:01:15.133Z",
+      "lastValidAt": "2026-11-18T18:01:15.133Z",
       "lastResult": {
-        "status": "operational",
-        "at": "2026-11-18T17:55:38.428Z"
+        "status": "partial",
+        "at": "2026-11-18T18:01:15.133Z"
       },
-      "goodRounds": 277,
-      "activeIncident": false,
+      "goodRounds": 0,
+      "activeIncident": true,
       "recovering": false
     },
     {
@@ -66,18 +94,18 @@
         "status": "ok",
         "reason": null,
         "code": 200,
-        "ms": 404
+        "ms": 540
       },
       "retry": null,
       "regions": [],
       "firstCheckedAt": "2026-11-02T14:36:36.301Z",
-      "checkedAt": "2026-11-18T17:55:38.428Z",
-      "lastValidAt": "2026-11-18T17:55:38.428Z",
+      "checkedAt": "2026-11-18T18:01:15.133Z",
+      "lastValidAt": "2026-11-18T18:01:15.133Z",
       "lastResult": {
         "status": "operational",
-        "at": "2026-11-18T17:55:38.428Z"
+        "at": "2026-11-18T18:01:15.133Z"
       },
-      "goodRounds": 237,
+      "goodRounds": 238,
       "activeIncident": false,
       "recovering": false
     },
@@ -92,23 +120,35 @@
         "status": "ok",
         "reason": null,
         "code": 200,
-        "ms": 181
+        "ms": 659
       },
       "retry": null,
       "regions": [],
       "firstCheckedAt": "2026-11-02T14:36:36.301Z",
-      "checkedAt": "2026-11-18T17:55:38.428Z",
-      "lastValidAt": "2026-11-18T17:55:38.428Z",
+      "checkedAt": "2026-11-18T18:01:15.133Z",
+      "lastValidAt": "2026-11-18T18:01:15.133Z",
       "lastResult": {
         "status": "operational",
-        "at": "2026-11-18T17:55:38.428Z"
+        "at": "2026-11-18T18:01:15.133Z"
       },
-      "goodRounds": 265,
+      "goodRounds": 266,
       "activeIncident": false,
       "recovering": false
     }
   ],
   "incidents": [
+    {
+      "number": 6,
+      "title": "Acceso a la aplicación: Possible partial outage",
+      "body": "<!-- slatedsk-monitor:app -->\nPossible partial outage\n\nLast checked: 2026-11-18T18:01:15.133Z.\n\nCause not yet confirmed. These checks do not validate sign-in, billing or every operation.\n\nPublic evidence:\n\n```json\n{\"checkedAt\":\"2026-11-18T18:01:15.133Z\",\"primary\":{\"status\":\"slow\",\"reason\":null,\"code\":200,\"ms\":16282},\"retry\":{\"status\":\"fail\",\"reason\":\"ECONNRESET\",\"code\":null,\"ms\":null},\"regions\":[{\"region\":\"EU\",\"country\":\"FI\",\"city\":\"Helsinki\",\"measurementId\":\"2zth4paRWTKsVOWis00121WnZ\",\"status\":\"ok\",\"reason\":null,\"code\":200,\"ms\":598,\"assetMeasurementId\":\"2zpjdNFvPSwdNFKxu00121WnZ\"},{\"region\":\"NA\",\"country\":\"US\",\"city\":\"Los Angeles\",\"measurementId\":\"2dY14hN7XhE6ldh5f00121WnZ\",\"status\":\"ok\",\"reason\":null,\"code\":200,\"ms\":1138,\"assetMeasurementId\":\"21IYQPLLI1z9iWGW800121WnZ\"}]}\n```",
+      "url": "https://github.com/espectre00/slatedsk-status/issues/6",
+      "state": "open",
+      "createdAt": "2026-11-18T18:01:43Z",
+      "closedAt": null,
+      "maintenance": false,
+      "manual": false,
+      "updates": []
+    },
     {
       "number": 5,
       "title": "Acceso a la aplicación: Possible partial outage",
@@ -180,11 +220,6 @@
   ],
   "history": {
     "web": [
-      {
-        "at": "2026-11-18T13:01:23.111Z",
-        "status": "operational",
-        "ms": 807
-      },
       {
         "at": "2026-11-18T13:05:44.675Z",
         "status": "operational",
@@ -479,14 +514,14 @@
         "at": "2026-11-18T17:55:38.428Z",
         "status": "operational",
         "ms": 463
+      },
+      {
+        "at": "2026-11-18T18:01:15.133Z",
+        "status": "operational",
+        "ms": 1044
       }
     ],
     "app": [
-      {
-        "at": "2026-11-18T13:01:23.111Z",
-        "status": "operational",
-        "ms": 589
-      },
       {
         "at": "2026-11-18T13:05:44.675Z",
         "status": "operational",
@@ -781,14 +816,14 @@
         "at": "2026-11-18T17:55:38.428Z",
         "status": "operational",
         "ms": 600
+      },
+      {
+        "at": "2026-11-18T18:01:15.133Z",
+        "status": "partial",
+        "ms": 16282
       }
     ],
     "api": [
-      {
-        "at": "2026-11-18T13:01:23.111Z",
-        "status": "operational",
-        "ms": 561
-      },
       {
         "at": "2026-11-18T13:05:44.675Z",
         "status": "operational",
@@ -1083,14 +1118,14 @@
         "at": "2026-11-18T17:55:38.428Z",
         "status": "operational",
         "ms": 404
+      },
+      {
+        "at": "2026-11-18T18:01:15.133Z",
+        "status": "operational",
+        "ms": 540
       }
     ],
     "data": [
-      {
-        "at": "2026-11-18T13:01:23.111Z",
-        "status": "operational",
-        "ms": 254
-      },
       {
         "at": "2026-11-18T13:05:44.675Z",
         "status": "operational",
@@ -1385,6 +1420,11 @@
         "at": "2026-11-18T17:55:38.428Z",
         "status": "operational",
         "ms": 181
+      },
+      {
+        "at": "2026-11-18T18:01:15.133Z",
+        "status": "operational",
+        "ms": 659
       }
     ]
   }
