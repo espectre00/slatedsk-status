@@ -5,14 +5,14 @@
 Repositorio de emergencia independiente de la aplicación. Comprueba web, HTML/JavaScript de acceso, salud de API y conexión con datos. No garantiza login, facturación ni todas las operaciones.
 
 <!-- live:start -->
-Última ronda: **2026-11-19T22:20:45.897Z**. Tras 15 minutos este resumen debe considerarse **sin verificar**.
+Última ronda: **2026-11-19T22:25:36.114Z**. Tras 15 minutos este resumen debe considerarse **sin verificar**.
 
 | Componente | Último resultado |
 |---|---|
 | Web pública | Operational |
 | Acceso a la aplicación | Operational |
 | API | Operational |
-| Conexión con datos | Operational |
+| Conexión con datos | Under observation |
 
 [Incidencias y actualizaciones](https://github.com/espectre00/slatedsk-status/issues) · [Datos con fechas y regiones](site/data/status.json)
 <!-- live:end -->
