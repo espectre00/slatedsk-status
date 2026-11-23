@@ -5,7 +5,7 @@
 Repositorio de emergencia independiente de la aplicación. Comprueba web, HTML/JavaScript de acceso, salud de API y conexión con datos. No garantiza login, facturación ni todas las operaciones.
 
 <!-- live:start -->
-Última ronda: **2026-11-23T12:15:44.271Z**. Tras 15 minutos este resumen debe considerarse **sin verificar**.
+Última ronda: **2026-11-23T12:20:42.881Z**. Tras 15 minutos este resumen debe considerarse **sin verificar**.
 
 | Componente | Último resultado |
 |---|---|
